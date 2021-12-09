@@ -1,6 +1,8 @@
 package com.aws.CI_CD;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -21,7 +23,10 @@ public class SpringbootAwsCiCdApplication {
 	
 	@GetMapping("/order")
 	public List<Order> getOrders(){
-		return orderService.getOrders();
+		return orderService.getOrders()
+						   .stream()
+						   .sorted(Comparator.comparing(Order::getPrice))
+						   .collect(Collectors.toList());
 	}
 
 	
