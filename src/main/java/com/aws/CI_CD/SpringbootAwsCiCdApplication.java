@@ -23,7 +23,6 @@ public class SpringbootAwsCiCdApplication {
 	
 	@GetMapping("/order")
 	public List<Order> getOrders(){
-		//Sort Order based on price
 		return orderService.getOrders()
 						   .stream()
 						   .sorted(Comparator.comparing(Order::getPrice))
